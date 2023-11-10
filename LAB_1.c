@@ -6,7 +6,6 @@
 
 struct matrixStruct
 {
-    
     int book_id[ROWS][COLS];
 };
 
@@ -16,6 +15,8 @@ void insertionDisplay();
 int deleteElement(int row, int col);
 void displayMatrix();
 int linearSearch(int bookID);
+void addMatrix();
+void mulMatrix();
 int main()
 {
     int choice, bookID, row, col;
@@ -24,7 +25,7 @@ int main()
     while (continueMenu)
     {
         printf("----------------------Library Management---------------------------\n");
-        printf("Enter your Choice (1: Insert, 2: Delete, 3: Display, 4: Search, 0: Exit): ");
+        printf("Enter your Choice (1: Insert, 2: Delete, 3: Display, 4: Search, 5: Add Matrix, 6: Multiply Matrix, 0: Exit): ");
         scanf("%d", &choice);
 
         switch (choice)
@@ -34,9 +35,9 @@ int main()
             insertionDisplay();
             break;
         case 2:
-             printf("Enter the Row and Column of the matrix \n");
-            scanf("%d %d", &row,&col);
-            deleteElement(row-1, col-1);
+             printf("Enter the Row and Column of the matrix:\n");
+            scanf("%d %d", &row, &col);
+            deleteElement(row - 1, col - 1);
             break;
         case 3:
             displayMatrix();
@@ -45,6 +46,14 @@ int main()
             printf("Enter the book ID to search for: ");
             scanf("%d", &bookID);
             linearSearch(bookID);
+            break;
+        case 5:
+            printf("----------------MATRIX ADDITION----------------------\n");
+            addMatrix();
+            break;
+        case 6:
+            printf("----------------MATRIX MULTIPLICATION----------------------\n");
+            mulMatrix();
             break;
         case 0:
             continueMenu = 0; // Exit the loop
@@ -120,4 +129,44 @@ int linearSearch(int bookID)
         }
     }
     return printf("Book with ID %d is not found\n", bookID);
+}
+
+void addMatrix()
+{
+    int i, j, sum[3][3];
+    for (i = 0; i < ROWS; ++i)
+        for (j = 0; j < COLS; ++j)
+        {
+            sum[i][j] = library.book_id[i][j] + library.book_id[i][j];
+        }
+
+    for (int i = 0; i < ROWS; i++)
+    {
+        printf(" ");
+        for (int j = 0; j < COLS; j++)
+        {
+            printf("%d     ", sum[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void mulMatrix()
+{
+    int i, j, mul[3][3];
+    for (i = 0; i < ROWS; ++i)
+        for (j = 0; j < COLS; ++j)
+        {
+            mul[i][j] = library.book_id[i][j] * library.book_id[i][j];
+        }
+
+    for (int i = 0; i < ROWS; i++)
+    {
+        printf(" ");
+        for (int j = 0; j < COLS; j++)
+        {
+            printf("%d     ", mul[i][j]);
+        }
+        printf("\n");
+    }
 }
